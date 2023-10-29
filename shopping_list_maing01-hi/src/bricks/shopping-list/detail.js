@@ -5,6 +5,7 @@ import Uu5Forms from "uu5g05-forms";
 import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
 import Uu5TilesElements from "uu5tilesg02-elements";
+// import UuPlus4UPeople from "uu_plus4upeopleg01";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -27,8 +28,8 @@ const FILTER_DEFINITION_LIST = [
   },
 ];
 const FILTER_LIST = [
-  {key: "solved", value: "Solved only"},
-  {key: "solved", value: "All"}
+  { key: "solved", value: "Solved only" },
+  { key: "solved", value: "All" },
 ];
 //@@viewOff:constants
 
@@ -106,6 +107,14 @@ const Detail = createVisualComponent({
         return newShoppingListInfo;
       });
     }
+
+    function handleChangeParticipants(newParticipantsList) {
+      setShoppingListInfo((prevShoppingListInfo) => {
+        let newShoppingListInfo = { ...prevShoppingListInfo };
+        newShoppingListInfo.participantNameList = newParticipantsList;
+        return newShoppingListInfo;
+      });
+    }
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -121,65 +130,6 @@ const Detail = createVisualComponent({
       items: undefined,
     };
     const [shoppingListInfo, setShoppingListInfo] = useState(initialShoppingListInfo);
-
-    // return currentNestingLevel ? (
-    //   <div {...attrs}>
-    //     <Uu5Elements.Block
-    //       header={
-    //         <Uu5Forms.Text.Input
-    //           value={shoppingListInfo.name}
-    //           readOnly={shoppingListInfo.ownerName !== identity.name}
-    //           onChange={(event) => handleUpdateName(event.data.value)}
-    //           significance="subdued"
-    //           size="xl"
-    //         />
-    //       }
-    //       card="full"
-    //       headerType="heading"
-    //       level={5}
-    //       headerSeparator={true}
-    //       actionList={[
-    //         {
-    //           icon: "uugds-plus",
-    //           children: <Lsi lsi={{ cs: "Vytvořit", en: "Create" }} />,
-    //           primary: true,
-    //           onClick: handleAddItem,
-    //         },
-    //       ]}
-    //     >
-    //       <Uu5Elements.Grid>
-    //         {items.map((item) => {
-    //           return (
-    //             <Uu5Elements.ListItem
-    //               key={item.id}
-    //               actionList={[
-    //                 {
-    //                   icon: "mdi-delete",
-    //                   onClick: () => handleDeleteItem(item.id),
-    //                 },
-    //               ]}
-    //             >
-    //               <Uu5Elements.Grid flow="column" alignItems="center">
-    //                 <Uu5Forms.Checkbox.Input
-    //                   value={item.solved}
-    //                   icon={item.solved ? "uugds-check" : undefined}
-    //                   onClick={() => handleUpdateItem(item.id, "solved", !item.solved)}
-    //                 />
-    //                 <Uu5Forms.Text.Input
-    //                   value={item.name}
-    //                   onChange={(event) => handleUpdateItem(item.id, "name", event.data.value)}
-    //                   significance="subdued"
-    //                 />
-    //                 <Uu5Elements.Text>{`Created by: ${item.authorName}`}</Uu5Elements.Text>
-    //               </Uu5Elements.Grid>
-    //             </Uu5Elements.ListItem>
-    //           );
-    //         })}
-    //       </Uu5Elements.Grid>
-    //     </Uu5Elements.Block>
-    //      <Content nestingLevel={currentNestingLevel}>{children}</Content> */}
-    //   </div>
-    // ) : null;
 
     return currentNestingLevel ? (
       <div {...attrs}>
@@ -206,13 +156,20 @@ const Detail = createVisualComponent({
             },
           ]}
         >
+          <Uu5Forms.TextSelect
+            label="Participants"
+            itemList={shoppingListInfo.participantNameList.map((participant) => ({ value: participant }))}
+            value={shoppingListInfo.participantNameList}
+            multiple={true}
+            insertable={true}
+            readOnly={shoppingListInfo.ownerName !== identity.name}
+            onChange={(e) => handleChangeParticipants(e.data.value)}
+          />
           <Uu5Tiles.ControllerProvider data={items} filterDefinitionList={FILTER_DEFINITION_LIST}>
             <Uu5TilesControls.FilterBar initialExpanded />
             <Uu5TilesControls.SorterBar initialExpanded />
             <Uu5TilesElements.Grid>
               {({ itemIdentifier, data, displayedData }) => {
-                console.log("itemIdentifier", itemIdentifier, "data", data, "displayedData", displayedData);
-
                 return (
                   <>
                     <Uu5Elements.ListItem

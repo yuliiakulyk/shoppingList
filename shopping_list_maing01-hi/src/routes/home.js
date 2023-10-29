@@ -17,6 +17,7 @@ const shoppingList = {
   ownerUuIdentity: "19-6434-1",
   ownerName: "Yuliia Kulyk",
   participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
+  participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
   items: [
     {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e1", name: "Cookies", authorName: "Yuliia Kulyk", solved: false},
     {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e2", name: "Cake", authorName: "Yuliia Kulyk", solved: false},
