@@ -7,25 +7,45 @@ import { withRoute } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import WelcomeRow from "../bricks/welcome-row.js";
 import RouteBar from "../core/route-bar.js";
+import List from "../bricks/shopping-list/list.js";
 import importLsi from "../lsi/import-lsi.js";
-import Detail from "../bricks/shopping-list/detail.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
-const shoppingList = {
-  name: "Christmas shopping list",
-  ownerUuIdentity: "19-6434-1",
-  ownerName: "Yuliia Kulyk",
-  participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
-  participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
-  items: [
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e1", name: "Cookies", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e2", name: "Cake", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e3", name: "Christmas tree", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e4", name: "Christmas tree toys", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e5", name: "Candles", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e6", name: "Wine", authorName: "Yuliia Kulyk", solved: false},
-  ]};
+const shoppingListList = [
+  {
+    name: "Christmas shopping list",
+    ownerUuIdentity: "19-6434-1",
+    ownerName: "Yuliia Kulyk",
+    participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
+    participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
+    items: [],
+  },
+  {
+    name: "New Year shopping list",
+    ownerUuIdentity: "19-6434-1",
+    ownerName: "Yuliia Kulyk",
+    participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
+    participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
+    items: [],
+  },
+  {
+    name: "Food weekly",
+    ownerUuIdentity: "19-6434-1",
+    ownerName: "Yuliia Kulyk",
+    participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
+    participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
+    items: [],
+  },
+  {
+    name: "Food barbecue",
+    ownerUuIdentity: "19-6434-1",
+    ownerName: "Yuliia Kulyk",
+    participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
+    participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
+    items: [],
+  },
+];
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -77,7 +97,7 @@ let Home = createVisualComponent({
             </Uu5Elements.Text>
           )}
         </WelcomeRow>
-        <Detail data={shoppingList}/>
+        <List listData={shoppingListList}/>
       </div>
     );
     //@@viewOff:render

@@ -19,25 +19,8 @@ const About = {
   },
   leadingAuthors: [
     {
-      name: "Some Name",
-      uuIdentity: "4-4-1",
-      role: "Chief Business Architect & Stakeholder",
-    },
-    {
-      name: "Other Name",
-      uuIdentity: "4-4-1",
-      role: "Head of Development",
-    },
-  ],
-  otherAuthors: [
-    {
-      name: "Your Name",
-      uuIdentity: "4-4-1",
-      role: "Developer",
-    },
-    {
-      name: "More Names",
-      uuIdentity: "4-4-1",
+      name: "Yuliia Kulyk",
+      uuIdentity: "19-6434-1",
       role: "Developer",
     },
   ],
