@@ -1,6 +1,7 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content } from "uu5g05";
+import { createVisualComponent, Utils, PropTypes, Content } from "uu5g05";
 import Config from "./config/config.js";
+import { Form, FormText, SubmitButton, CancelButton } from "uu5g05-forms";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -22,16 +23,23 @@ const CreateForm = createVisualComponent({
   //@@viewOff:statics
 
   //@@viewOn:propTypes
-  propTypes: {},
+  propTypes: {
+    onSubmit: PropTypes.func,
+    onCancel: PropTypes.func,
+  },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
-  defaultProps: {},
+  defaultProps: {
+    onSubmit: () => {},
+    onCancel: () => {},
+  },
   //@@viewOff:defaultProps
 
   render(props) {
     //@@viewOn:private
     const { children } = props;
+    const { elementProps } = Utils.VisualComponent.splitProps(props);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -42,10 +50,13 @@ const CreateForm = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, CreateForm);
 
     return currentNestingLevel ? (
-      <div {...attrs}>
-        <div>Visual Component {CreateForm.uu5Tag}</div>
-        <Content nestingLevel={currentNestingLevel}>{children}</Content>
-      </div>
+      <Form {...elementProps} onSubmit={props.onSubmit}>
+        <FormText name="name" label="Name" required />
+        <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", paddingTop: 8 }}>
+          <CancelButton onClick={props.onCancel}>Cancel</CancelButton>
+          <SubmitButton>Create shopping list</SubmitButton>
+        </div>
+      </Form>
     ) : null;
     //@@viewOff:render
   },

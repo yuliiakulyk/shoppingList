@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content, Lsi, useState } from "uu5g05";
+import { createVisualComponent, Utils, Content, Lsi, useState, useSession } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
 import Uu5Tiles from "uu5tilesg02";
@@ -50,16 +50,22 @@ const List = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, List);
     const [shoppingLists, setShoppingLists] = useState(listData);
     const [createModalOpen, setCreateModalOpen] = useState({ open: false });
+    const { identity } = useSession();
     const handleCreateShoppingList = () => setCreateModalOpen({ open: true });
     const handleCloseCreateShoppingList = () => setCreateModalOpen({ open: false });
-    function createShoppingList(values) {
+    function createShoppingList(event) {
       const shoppingList = {
-        ...values,
+        ...event.data.value,
         id: Utils.String.generateId(),
-        uuIdentityName: "Gerald of Rivia",
+        ownerName: identity.name,
+        ownerUuIdentity: identity.uuIdentity,
+        participantUuIdentityList: [],
+        participantNameList: [],
+        items: []
       };
 
       setShoppingLists((prevShoppingLists) => [...prevShoppingLists, shoppingList]);
+      setCreateModalOpen({ open: false });
       return shoppingList;
     }
 
@@ -107,7 +113,7 @@ const List = createVisualComponent({
           </Uu5Tiles.ControllerProvider>
           <Content nestingLevel={currentNestingLevel}>{children}</Content>
         </Uu5Elements.Block>
-        {createModalOpen.open && <CreateModal onClose={handleCloseCreateShoppingList} />}
+        {createModalOpen.open && <CreateModal onClose={handleCloseCreateShoppingList} onFormSubmit={createShoppingList}/>}
       </div>
     ) : null;
     //@@viewOff:render

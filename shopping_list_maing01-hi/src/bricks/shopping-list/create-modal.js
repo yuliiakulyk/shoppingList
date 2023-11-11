@@ -1,7 +1,8 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content, PropTypes } from "uu5g05";
-import Config from "./config/config.js";
 import { Modal, Box, Line, Text, DateTime } from "uu5g05-elements";
+import Config from "./config/config.js";
+import CreateForm from "./create-form";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -27,7 +28,7 @@ const CreateModal = createVisualComponent({
     jokeDataObject: PropTypes.object.isRequired,
     categoryList: PropTypes.array,
     onClose: PropTypes.func,
-    onUpdate: PropTypes.func,
+    onFormSubmit: PropTypes.func,
     onDelete: PropTypes.func,
   },
   //@@viewOff:propTypes
@@ -48,21 +49,17 @@ const CreateModal = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, CreateModal);
 
-    return (
-      <Modal
-        header={"Create a new shopping list"}
-        onClose={props.onClose}
-        open
-      >
+    return currentNestingLevel ? (
+      <Modal header={"Create a new shopping list"} onClose={props.onClose} open>
         {(modal) => (
-          <div>
-            <Text>
-              Inputs to define a shopping list...
-            </Text>
-          </div>
+          <CreateForm
+            onSubmit={props.onFormSubmit}
+            onCancel={props.onClose}
+            style={{ margin: "24px ", display: "block" }}
+          />
         )}
       </Modal>
-    );
+    ) : null;
     //@@viewOff:render
   },
 });

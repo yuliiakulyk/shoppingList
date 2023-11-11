@@ -1,8 +1,8 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content } from "uu5g05";
+import Plus4U5App, { withRoute } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Detail from "../bricks/shopping-list/detail.js";
-import Plus4U5App, { withRoute } from "uu_plus4u5g02-app";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -13,13 +13,14 @@ const shoppingList = {
   participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
   participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
   items: [
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e1", name: "Cookies", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e2", name: "Cake", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e3", name: "Christmas tree", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e4", name: "Christmas tree toys", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e5", name: "Candles", authorName: "Yuliia Kulyk", solved: false},
-    {id: "4c1a9edb30aa48ab825d2c5dec3d1b7e6", name: "Wine", authorName: "Yuliia Kulyk", solved: false},
-  ]};
+    { id: "4c1a9edb30aa48ab825d2c5dec3d1b7e1", name: "Cookies", authorName: "Yuliia Kulyk", solved: false },
+    { id: "4c1a9edb30aa48ab825d2c5dec3d1b7e2", name: "Cake", authorName: "Yuliia Kulyk", solved: false },
+    { id: "4c1a9edb30aa48ab825d2c5dec3d1b7e3", name: "Christmas tree", authorName: "Yuliia Kulyk", solved: false },
+    { id: "4c1a9edb30aa48ab825d2c5dec3d1b7e4", name: "Christmas tree toys", authorName: "Yuliia Kulyk", solved: false },
+    { id: "4c1a9edb30aa48ab825d2c5dec3d1b7e5", name: "Candles", authorName: "Yuliia Kulyk", solved: false },
+    { id: "4c1a9edb30aa48ab825d2c5dec3d1b7e6", name: "Wine", authorName: "Yuliia Kulyk", solved: false },
+  ],
+};
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -59,7 +60,7 @@ let ShoppingListDetail = createVisualComponent({
 
     return currentNestingLevel ? (
       <div {...attrs}>
-        <Detail data={shoppingList}/>
+        <Detail data={shoppingList} />
         <Content nestingLevel={currentNestingLevel}>{children}</Content>
       </div>
     ) : null;
