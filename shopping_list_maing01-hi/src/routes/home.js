@@ -14,6 +14,7 @@ import importLsi from "../lsi/import-lsi.js";
 //@@viewOn:constants
 const shoppingListList = [
   {
+    id: "4c1a9edb30aa48ab825d2c5dec3d1b71",
     name: "Christmas shopping list",
     ownerUuIdentity: "19-6434-1",
     ownerName: "Yuliia Kulyk",
@@ -22,6 +23,7 @@ const shoppingListList = [
     items: [],
   },
   {
+    id: "4c1a9edb30aa48ab825d2c5dec3d1b72",
     name: "New Year shopping list",
     ownerUuIdentity: "19-6434-1",
     ownerName: "Yuliia Kulyk",
@@ -30,6 +32,7 @@ const shoppingListList = [
     items: [],
   },
   {
+    id: "4c1a9edb30aa48ab825d2c5dec3d1b73",
     name: "Food weekly",
     ownerUuIdentity: "19-6434-1",
     ownerName: "Yuliia Kulyk",
@@ -38,6 +41,7 @@ const shoppingListList = [
     items: [],
   },
   {
+    id: "4c1a9edb30aa48ab825d2c5dec3d1b74",
     name: "Food barbecue",
     ownerUuIdentity: "19-6434-1",
     ownerName: "Yuliia Kulyk",

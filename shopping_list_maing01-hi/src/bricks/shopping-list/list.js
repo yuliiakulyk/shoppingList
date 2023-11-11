@@ -7,6 +7,7 @@ import Uu5TilesControls from "uu5tilesg02-controls";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Config from "./config/config.js";
 import CreateModal from "./create-modal";
+import DeleteModal from "./delete-modal";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -50,9 +51,12 @@ const List = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, List);
     const [shoppingLists, setShoppingLists] = useState(listData);
     const [createModalOpen, setCreateModalOpen] = useState({ open: false });
+    const [deleteModalOpen, setDeleteModalOpen] = useState({ open: false });
     const { identity } = useSession();
-    const handleCreateShoppingList = () => setCreateModalOpen({ open: true });
-    const handleCloseCreateShoppingList = () => setCreateModalOpen({ open: false });
+    const handleOpenCreateModal = () => setCreateModalOpen({ open: true });
+    const handleOpenDeleteModal = (shoppingListId) => setDeleteModalOpen({ open: true, shoppingListId });
+    const handleCloseCreateModal = () => setCreateModalOpen({ open: false });
+    const handleCloseDeleteModal = () => setDeleteModalOpen({ open: false });
     function createShoppingList(event) {
       const shoppingList = {
         ...event.data.value,
@@ -61,12 +65,18 @@ const List = createVisualComponent({
         ownerUuIdentity: identity.uuIdentity,
         participantUuIdentityList: [],
         participantNameList: [],
-        items: []
+        items: [],
       };
 
       setShoppingLists((prevShoppingLists) => [...prevShoppingLists, shoppingList]);
       setCreateModalOpen({ open: false });
       return shoppingList;
+    }
+
+    function deleteShoppingList() {
+      let newShoppingLists = shoppingLists.filter((shoppingList) => shoppingList.id !== deleteModalOpen.shoppingListId);
+      setShoppingLists(() => newShoppingLists);
+      setDeleteModalOpen({ open: false, shoppingListId: undefined });
     }
 
     return currentNestingLevel ? (
@@ -82,7 +92,7 @@ const List = createVisualComponent({
               icon: "uugds-plus",
               children: <Lsi lsi={{ cs: "Vytvořit", en: "Create" }} />,
               primary: true,
-              onClick: () => handleCreateShoppingList(),
+              onClick: () => handleOpenCreateModal(),
             },
           ]}
         >
@@ -97,7 +107,7 @@ const List = createVisualComponent({
                       actionList={[
                         {
                           icon: "mdi-delete",
-                          //onClick: () => handleDeleteItem(data.id),
+                          onClick: () => handleOpenDeleteModal(data.id),
                         },
                       ]}
                     >
@@ -113,7 +123,8 @@ const List = createVisualComponent({
           </Uu5Tiles.ControllerProvider>
           <Content nestingLevel={currentNestingLevel}>{children}</Content>
         </Uu5Elements.Block>
-        {createModalOpen.open && <CreateModal onClose={handleCloseCreateShoppingList} onFormSubmit={createShoppingList}/>}
+        {createModalOpen.open && <CreateModal onClose={handleCloseCreateModal} onFormSubmit={createShoppingList} />}
+        {deleteModalOpen.open && <DeleteModal onClose={handleCloseDeleteModal} onFormSubmit={deleteShoppingList} />}
       </div>
     ) : null;
     //@@viewOff:render
