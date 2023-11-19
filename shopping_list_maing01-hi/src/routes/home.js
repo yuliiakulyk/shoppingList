@@ -3,53 +3,17 @@ import { Utils, createVisualComponent, useSession, Lsi } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { withRoute } from "uu_plus4u5g02-app";
+import { RouteController } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import WelcomeRow from "../bricks/welcome-row.js";
 import RouteBar from "../core/route-bar.js";
 import List from "../bricks/shopping-list/list.js";
 import importLsi from "../lsi/import-lsi.js";
+import ShoppingListProvider from "../shopping-list/provider.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
-const shoppingListList = [
-  {
-    id: "4c1a9edb30aa48ab825d2c5dec3d1b71",
-    name: "Christmas shopping list",
-    ownerUuIdentity: "19-6434-1",
-    ownerName: "Yuliia Kulyk",
-    participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
-    participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
-    items: [],
-  },
-  {
-    id: "4c1a9edb30aa48ab825d2c5dec3d1b72",
-    name: "New Year shopping list",
-    ownerUuIdentity: "19-6434-1",
-    ownerName: "Yuliia Kulyk",
-    participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
-    participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
-    items: [],
-  },
-  {
-    id: "4c1a9edb30aa48ab825d2c5dec3d1b73",
-    name: "Food weekly",
-    ownerUuIdentity: "19-6434-1",
-    ownerName: "Yuliia Kulyk",
-    participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
-    participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
-    items: [],
-  },
-  {
-    id: "4c1a9edb30aa48ab825d2c5dec3d1b74",
-    name: "Food barbecue",
-    ownerUuIdentity: "19-6434-1",
-    ownerName: "Yuliia Kulyk",
-    participantUuIdentityList: ["1-1", "4-1", "642-1-1", "12-444-1"],
-    participantNameList: ["Vladimir Kovar", "Radek Dolejs", "Ivo Milota", "Zdenek Koubek"],
-    items: [],
-  },
-];
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -101,7 +65,13 @@ let Home = createVisualComponent({
             </Uu5Elements.Text>
           )}
         </WelcomeRow>
-        <List listData={shoppingListList}/>
+        <ShoppingListProvider>
+          {(shoppingListList) => (
+            <RouteController routeDataObject={shoppingListList}>
+              <List listData={shoppingListList.data} />
+            </RouteController>
+          )}
+        </ShoppingListProvider>
       </div>
     );
     //@@viewOff:render

@@ -19,6 +19,61 @@ const Calls = {
   //   return Calls.call("get", commandUri, dtoIn);
   // },
 
+  ShoppingList: {
+    list(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+    load(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/load");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+    update(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/update");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    create(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    delete(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/delete");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    addItem(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/addItem");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    removeItem(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/removeItem");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    markItemSolved(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/markItemSolved");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    archive(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/archive");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    setOwner(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/setOwner");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    leave(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/leave");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    addMember(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/addMember");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    removeMember(dtoIn) {
+      const commandUri = Calls.getCommandUri("shoppingList/removeMember");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+  },
+
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
     return Calls.call("get", commandUri);

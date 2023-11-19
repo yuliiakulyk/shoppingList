@@ -79,6 +79,8 @@ const List = createVisualComponent({
       setDeleteModalOpen({ open: false, shoppingListId: undefined });
     }
 
+    console.log("shoppingLists", shoppingLists);
+
     return currentNestingLevel ? (
       <div {...attrs}>
         <Uu5Elements.Block
@@ -99,6 +101,7 @@ const List = createVisualComponent({
           <Uu5Tiles.ControllerProvider data={shoppingLists}>
             <Uu5TilesElements.Grid>
               {({ itemIdentifier, data, displayedData }) => {
+                data = data.data;
                 return (
                   <>
                     <Uu5Elements.ListItem
@@ -108,12 +111,13 @@ const List = createVisualComponent({
                         {
                           icon: "mdi-delete",
                           onClick: () => handleOpenDeleteModal(data.id),
+                          disabled: identity.name !== data.ownerName,
                         },
                       ]}
                     >
                       <Uu5Elements.Grid flow="column" alignItems="center">
                         <Uu5Elements.Link href={"shoppingListDetail"}>{data.name}</Uu5Elements.Link>
-                        <Uu5Elements.Text>{`Created by: ${data.ownerName}`}</Uu5Elements.Text>
+                        <Uu5Elements.Text>{`Owned by: ${data.ownerName}`}</Uu5Elements.Text>
                       </Uu5Elements.Grid>
                     </Uu5Elements.ListItem>
                   </>

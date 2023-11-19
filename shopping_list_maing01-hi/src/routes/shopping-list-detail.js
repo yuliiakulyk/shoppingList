@@ -3,6 +3,7 @@ import { createVisualComponent, Utils, Content } from "uu5g05";
 import Plus4U5App, { withRoute } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Detail from "../bricks/shopping-list/detail.js";
+import Calls from "calls";
 //@@viewOff:imports
 
 //@@viewOn:constants
