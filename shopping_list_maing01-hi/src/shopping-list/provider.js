@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataList } from "uu5g05";
+import { createComponent, useDataObject } from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "calls";
 //@@viewOff:imports
@@ -26,20 +26,60 @@ const Provider = createComponent({
   render(props) {
     //@@viewOn:private
     //const { children } = props;
-    const shoppingListDataList = useDataList({
+
+    const shoppingListData = useDataObject({
       handlerMap: {
         load: handleLoad,
-        create: handleCreate,
+        update: handleUpdate,
+        addItem: handleAddItem,
+        removeItem: handleRemoveItem,
+        markItemSolved: handleMarkItemSolved,
+        archive: handleArchive,
+        setOwner: handleSetOwner,
+        leave: handleLeave,
+        addMember: handleAddMember,
+        removeMember: handleRemoveMember,
       },
-      itemHandlerMap: {}
     });
 
     function handleLoad(dtoIn) {
-      return Calls.ShoppingList.list(dtoIn);
+      return Calls.ShoppingList.load(dtoIn);
     }
 
-    function handleCreate(dtoIn) {
-      return Calls.ShoppingList.create(dtoIn);
+    function handleUpdate(dtoIn) {
+      return Calls.ShoppingList.update(dtoIn);
+    }
+
+    function handleAddItem(dtoIn) {
+      return Calls.ShoppingList.addItem(dtoIn);
+    }
+
+    function handleRemoveItem(dtoIn) {
+      return Calls.ShoppingList.removeItem(dtoIn);
+    }
+
+    function handleMarkItemSolved(dtoIn) {
+      return Calls.ShoppingList.markItemSolved(dtoIn);
+    }
+
+    function handleArchive(dtoIn) {
+      return Calls.ShoppingList.archive(dtoIn);
+    }
+
+    function handleSetOwner(dtoIn) {
+      return Calls.ShoppingList.setOwner(dtoIn);
+    }
+
+    function handleLeave(dtoIn) {
+      return Calls.ShoppingList.leave(dtoIn);
+    }
+
+    function handleAddMember(dtoIn) {
+      return Calls.ShoppingList.addMember(dtoIn);
+    }
+
+    function handleRemoveMember(dtoIn) {
+      return Calls.ShoppingList.removeMember(dtoIn);
     }
     //@@viewOff:private
 
@@ -47,7 +87,7 @@ const Provider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    return typeof props.children === "function" ? props.children(shoppingListDataList) : props.children;
+    return typeof props.children === "function" ? props.children(shoppingListData) : props.children;
     //@@viewOff:render
   },
 });

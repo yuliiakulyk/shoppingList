@@ -38,6 +38,7 @@ const Calls = {
     },
     delete(dtoIn) {
       const commandUri = Calls.getCommandUri("shoppingList/delete");
+      console.log('called delete with dtoIn', dtoIn);
       return Calls.call("post", commandUri, dtoIn);
     },
     addItem(dtoIn) {

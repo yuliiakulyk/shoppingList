@@ -1,6 +1,7 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content, Lsi, useState, useSession } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
+import { useAlertBus } from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
 import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
@@ -23,9 +24,9 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const List = createVisualComponent({
+const ListView = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "List",
+  uu5Tag: Config.TAG + "ListView",
   nestingLevel: ["areaCollection", "area"],
   //@@viewOff:statics
 
@@ -41,6 +42,7 @@ const List = createVisualComponent({
     //@@viewOn:private
     const { children } = props;
     const { listData } = props;
+    let shoppingLists = listData.data;
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -48,38 +50,34 @@ const List = createVisualComponent({
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, List);
-    const [shoppingLists, setShoppingLists] = useState(listData);
+    const { addAlert } = useAlertBus();
+    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ListView);
+    //const [shoppingLists, setShoppingLists] = useState(listData.data);
     const [createModalOpen, setCreateModalOpen] = useState({ open: false });
     const [deleteModalOpen, setDeleteModalOpen] = useState({ open: false });
     const { identity } = useSession();
     const handleOpenCreateModal = () => setCreateModalOpen({ open: true });
-    const handleOpenDeleteModal = (shoppingListId) => setDeleteModalOpen({ open: true, shoppingListId });
+    const handleOpenDeleteModal = (shoppingListId, itemDeleteHandler) => setDeleteModalOpen({ open: true, shoppingListId, itemDeleteHandler });
     const handleCloseCreateModal = () => setCreateModalOpen({ open: false });
     const handleCloseDeleteModal = () => setDeleteModalOpen({ open: false });
-    function createShoppingList(event) {
-      const shoppingList = {
-        ...event.data.value,
-        id: Utils.String.generateId(),
-        ownerName: identity.name,
-        ownerUuIdentity: identity.uuIdentity,
-        participantUuIdentityList: [],
-        participantNameList: [],
-        items: [],
-      };
+    function showError(error, header = "") {
+      addAlert({
+        header,
+        message: error.message,
+        priority: "error",
+      });
+    }
 
-      setShoppingLists((prevShoppingLists) => [...prevShoppingLists, shoppingList]);
+    function createShoppingList(event) {
+      listData.handlerMap.create(event.data.value);
       setCreateModalOpen({ open: false });
-      return shoppingList;
     }
 
     function deleteShoppingList() {
-      let newShoppingLists = shoppingLists.filter((shoppingList) => shoppingList.id !== deleteModalOpen.shoppingListId);
-      setShoppingLists(() => newShoppingLists);
+      deleteModalOpen.itemDeleteHander({ id: deleteModalOpen.shoppingListId});
+      //listData.itemHandlerMap.delete(deleteModalOpen.shoppingListId);
       setDeleteModalOpen({ open: false, shoppingListId: undefined });
     }
-
-    console.log("shoppingLists", shoppingLists);
 
     return currentNestingLevel ? (
       <div {...attrs}>
@@ -102,6 +100,7 @@ const List = createVisualComponent({
             <Uu5TilesElements.Grid>
               {({ itemIdentifier, data, displayedData }) => {
                 data = data.data;
+                let handlerMap = data.handlerMap;
                 return (
                   <>
                     <Uu5Elements.ListItem
@@ -110,14 +109,14 @@ const List = createVisualComponent({
                       actionList={[
                         {
                           icon: "mdi-delete",
-                          onClick: () => handleOpenDeleteModal(data.id),
-                          disabled: identity.name !== data.ownerName,
+                          onClick: () => handleOpenDeleteModal(data.id, handlerMap.delete),
+                          disabled: identity?.name !== data?.ownerName,
                         },
                       ]}
                     >
                       <Uu5Elements.Grid flow="column" alignItems="center">
-                        <Uu5Elements.Link href={"shoppingListDetail"}>{data.name}</Uu5Elements.Link>
-                        <Uu5Elements.Text>{`Owned by: ${data.ownerName}`}</Uu5Elements.Text>
+                        <Uu5Elements.Link href={"shoppingListDetail"}>{data?.name}</Uu5Elements.Link>
+                        <Uu5Elements.Text>{`Owned by: ${data?.ownerName}`}</Uu5Elements.Text>
                       </Uu5Elements.Grid>
                     </Uu5Elements.ListItem>
                   </>
@@ -136,6 +135,6 @@ const List = createVisualComponent({
 });
 
 //@@viewOn:exports
-export { List };
-export default List;
+export { ListView };
+export default ListView;
 //@@viewOff:exports

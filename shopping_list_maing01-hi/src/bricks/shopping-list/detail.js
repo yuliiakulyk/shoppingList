@@ -74,47 +74,6 @@ const Detail = createVisualComponent({
     const { children } = props;
     const { identity } = useSession();
 
-    function handleAddItem() {
-      setItems((prevValue) => {
-        const newItem = { id: new Date().getTime(), name: null, solved: false, authorName: identity.name };
-        return [...prevValue, newItem];
-      });
-    }
-
-    function handleUpdateItem(id, key, value) {
-      setItems((prevItemList) => {
-        return prevItemList.map((item) => {
-          if (item.id === id) {
-            item[key] = value;
-          }
-          return item;
-        });
-      });
-    }
-
-    function handleDeleteItem(id) {
-      setItems((prevItemList) => {
-        return prevItemList.filter((item) => {
-          return item.id !== id;
-        });
-      });
-    }
-
-    function handleUpdateName(newName) {
-      setShoppingListInfo((prevShoppingListInfo) => {
-        let newShoppingListInfo = { ...prevShoppingListInfo };
-        newShoppingListInfo.name = newName;
-        return newShoppingListInfo;
-      });
-    }
-
-    function handleChangeParticipants(newParticipantsList) {
-      setShoppingListInfo((prevShoppingListInfo) => {
-        let newShoppingListInfo = { ...prevShoppingListInfo };
-        newShoppingListInfo.participantNameList = newParticipantsList;
-        return newShoppingListInfo;
-      });
-    }
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -124,12 +83,36 @@ const Detail = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, Detail);
     const { data } = props;
-    const [items, setItems] = useState(data.items);
-    const initialShoppingListInfo = {
-      ...data,
-      items: undefined,
-    };
-    const [shoppingListInfo, setShoppingListInfo] = useState(initialShoppingListInfo);
+    const shoppingListInfo = data.data;
+    const items = shoppingListInfo.items;
+    let handlerMap = data.handlerMap;
+
+    function handleUpdateName(newName) {
+      handlerMap.update({ name: newName });
+    }
+
+    function handleChangeParticipants(newParticipantsList) {
+      if (newParticipantsList.length > shoppingListInfo.participantNameList.length) {
+        let newParticipant = newParticipantsList.filter((participant) => !shoppingListInfo.participantNameList.includes(participant));
+        handlerMap.addMember(newParticipant);
+      } else {
+        let removedParticipant = shoppingListInfo.participantNameList.filter((participant) => !newParticipantsList.includes(participant));
+        handlerMap.removeMember(removedParticipant);
+      }
+    }
+
+    function handleAddItem() {
+      const newItem = { id: new Date().getTime(), name: "", solved: false, authorName: identity.name };
+      handlerMap.addItem(newItem);
+    }
+
+    function handleUpdateItem(id, key, value) {
+      handlerMap.updateItem({ id, name: value });
+    }
+
+    function handleDeleteItem(id) {
+      handlerMap.removeItem({ id });
+    }
 
     return currentNestingLevel ? (
       <div {...attrs}>

@@ -5,7 +5,7 @@ describe(`ShoppingList.ShoppingList.Provider`, () => {
   // it("onLoad", async () => {
   //   let onLoad = jest.fn(async () => ({ content: "Hello, world!" }));
   //   let loadDtoIn = { foo: "bar" };
-  //   let wrapper = mount(<ShoppingList.ShoppingList.Provider onLoad={onLoad} loadDtoIn={loadDtoIn} />);
+  //   let wrapper = mount(<ShoppingList.ShoppingList.ListProvider onLoad={onLoad} loadDtoIn={loadDtoIn} />);
   //   expect(onLoad).toHaveBeenCalledTimes(1);
   //   expect(onLoad).lastCalledWith(loadDtoIn);
   //   await wait();

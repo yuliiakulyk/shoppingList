@@ -10,7 +10,7 @@ import WelcomeRow from "../bricks/welcome-row.js";
 import RouteBar from "../core/route-bar.js";
 import List from "../bricks/shopping-list/list.js";
 import importLsi from "../lsi/import-lsi.js";
-import ShoppingListProvider from "../shopping-list/provider.js";
+import ShoppingListListProvider from "../shopping-list/list-provider.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -65,13 +65,13 @@ let Home = createVisualComponent({
             </Uu5Elements.Text>
           )}
         </WelcomeRow>
-        <ShoppingListProvider>
+        <ShoppingListListProvider>
           {(shoppingListList) => (
             <RouteController routeDataObject={shoppingListList}>
-              <List listData={shoppingListList.data} />
+              <List listData={shoppingListList} />
             </RouteController>
           )}
-        </ShoppingListProvider>
+        </ShoppingListListProvider>
       </div>
     );
     //@@viewOff:render
