@@ -6,5 +6,31 @@
     "participantUuIdentityList": [],
     "participantNameList": [],
     "items": [],
-    "uuAppErrorMap": {}
+    "uuAppErrorMap": {
+            "uu-testman-cases/branch/load/userNotAuthorizedByBranch": {
+                "id": "2539d4a56a501d6622e21709ba6b7fb9",
+                "timestamp": "2023-11-27T08:14:15.473Z",
+                "type": "error",
+                "message": "User not authorized by branch.",
+                "paramMap": {
+                    "authorizationResult": {
+                        "_uuIdentity": "19-6434-1",
+                        "_useCase": "uu-testman-casesg02/branch/load",
+                        "_isAuthorized": false,
+                        "_authorizationStrategy": null,
+                        "_authorizedProfiles": [],
+                        "_identityProfiles": [],
+                        "_useCaseProfileList": [],
+                        "_profileList": [],
+                        "_isObjectAuthorized": false,
+                        "_objectAuthorizationStrategy": "artifact",
+                        "_authorizedObjectProfileList": [],
+                        "_uuIdentityObjectProfileList": [],
+                        "_useCaseObjectProfileList": [],
+                        "_authorizationEnabled": true,
+                        "_authorizationError": null
+                    }
+                }
+            }
+        }
 }

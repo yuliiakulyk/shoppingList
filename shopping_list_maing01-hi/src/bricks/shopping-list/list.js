@@ -43,23 +43,7 @@ const ListView = createVisualComponent({
     const { children } = props;
     const { listData } = props;
     let shoppingLists = listData.data;
-    //@@viewOff:private
-
-    //@@viewOn:interface
-    //@@viewOff:interface
-
-    //@@viewOn:render
-    const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const { addAlert } = useAlertBus();
-    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ListView);
-    //const [shoppingLists, setShoppingLists] = useState(listData.data);
-    const [createModalOpen, setCreateModalOpen] = useState({ open: false });
-    const [deleteModalOpen, setDeleteModalOpen] = useState({ open: false });
-    const { identity } = useSession();
-    const handleOpenCreateModal = () => setCreateModalOpen({ open: true });
-    const handleOpenDeleteModal = (shoppingListId, itemDeleteHandler) => setDeleteModalOpen({ open: true, shoppingListId, itemDeleteHandler });
-    const handleCloseCreateModal = () => setCreateModalOpen({ open: false });
-    const handleCloseDeleteModal = () => setDeleteModalOpen({ open: false });
     function showError(error, header = "") {
       addAlert({
         header,
@@ -67,15 +51,52 @@ const ListView = createVisualComponent({
         priority: "error",
       });
     }
+    //@@viewOff:private
 
-    function createShoppingList(event) {
-      listData.handlerMap.create(event.data.value);
+    //@@viewOn:interface
+    //@@viewOff:interface
+
+    //@@viewOn:render
+    const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
+    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ListView);
+    //const [shoppingLists, setShoppingLists] = useState(listData.data);
+    const [createModalOpen, setCreateModalOpen] = useState({ open: false });
+    const [deleteModalOpen, setDeleteModalOpen] = useState({ open: false });
+    const { identity } = useSession();
+    const handleOpenCreateModal = () => setCreateModalOpen({ open: true });
+    const handleOpenDeleteModal = (shoppingListId, itemDeleteHandler) => {
+      console.log('itemDeleteHandler', itemDeleteHandler)
+      setDeleteModalOpen({ open: true, shoppingListId, itemDeleteHandler });
+    }
+    const handleCloseCreateModal = () => setCreateModalOpen({ open: false });
+    const handleCloseDeleteModal = () => setDeleteModalOpen({ open: false });
+
+    async function createShoppingList(event) {
+      let response;
+      try {
+        response = await listData.handlerMap.create(event.data.value);
+      } catch (error) {
+        showError(error, "Shopping list create failed!");
+      }
       setCreateModalOpen({ open: false });
+      let warningCodes = Object.keys(response.uuAppErrorMap);
+      warningCodes.length === 0 &&
+        addAlert({
+          message: `The shopping list ${event.data.value.name} has been created.`,
+          priority: "success",
+          durationMs: 2000,
+        });
+
+      warningCodes.length > 0 &&
+        addAlert({
+          message: response.uuAppErrorMap[warningCodes[0]].message,
+          priority: "warning",
+          durationMs: 2000,
+        });
     }
 
     function deleteShoppingList() {
-      deleteModalOpen.itemDeleteHander({ id: deleteModalOpen.shoppingListId});
-      //listData.itemHandlerMap.delete(deleteModalOpen.shoppingListId);
+      deleteModalOpen.itemDeleteHander({ id: deleteModalOpen.shoppingListId });
       setDeleteModalOpen({ open: false, shoppingListId: undefined });
     }
 
