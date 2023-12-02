@@ -166,18 +166,24 @@ const Detail = createVisualComponent({
                         },
                       ]}
                     >
-                      <Uu5Elements.Grid flow="column" alignItems="center">
-                        <Uu5Forms.Checkbox.Input
-                          value={data.solved}
-                          icon={data.solved ? "uugds-check" : undefined}
-                          onClick={() => handleUpdateItem(data.id, "solved", !data.solved)}
-                        />
-                        <Uu5Forms.Text.Input
-                          value={data.name}
-                          onChange={(event) => handleUpdateItem(data.id, "name", event.data.value)}
-                          significance="subdued"
-                        />
-                        <Uu5Elements.Text>{`${lsi.createdBy}: ${data.authorName}`}</Uu5Elements.Text>
+                      <Uu5Elements.Grid flow={{ xs: "row", s: "column" }} alignItems="center">
+                        <Uu5Elements.Grid.Item>
+                          <Uu5Forms.Checkbox.Input
+                            value={data.solved}
+                            icon={data.solved ? "uugds-check" : undefined}
+                            onClick={() => handleUpdateItem(data.id, "solved", !data.solved)}
+                          />
+                        </Uu5Elements.Grid.Item>
+                        <Uu5Elements.Grid.Item >
+                          <Uu5Forms.Text.Input
+                            value={data.name}
+                            onChange={(event) => handleUpdateItem(data.id, "name", event.data.value)}
+                            significance="subdued"
+                          />
+                        </Uu5Elements.Grid.Item>
+                        <Uu5Elements.Grid.Item>
+                          <Uu5Elements.Text>{`${lsi.createdBy}: ${data.authorName}`}</Uu5Elements.Text>
+                        </Uu5Elements.Grid.Item>
                       </Uu5Elements.Grid>
                     </Uu5Elements.ListItem>
                   </>
