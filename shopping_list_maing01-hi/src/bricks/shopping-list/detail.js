@@ -1,12 +1,12 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content, useState, Lsi, useSession, useDataController } from "uu5g05";
+import { createVisualComponent, Utils, Content, useState, Lsi, useSession, useDataController, useLsi } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
 import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
 import Uu5TilesElements from "uu5tilesg02-elements";
-// import UuPlus4UPeople from "uu_plus4upeopleg01";
 import Config from "./config/config.js";
+import importLsi from "../../lsi/import-lsi";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -73,6 +73,7 @@ const Detail = createVisualComponent({
     //@@viewOn:private
     const { children } = props;
     const { identity } = useSession();
+    const lsi = useLsi(importLsi, [Detail.uu5Tag]);
 
     //@@viewOff:private
 
@@ -133,14 +134,14 @@ const Detail = createVisualComponent({
           actionList={[
             {
               icon: "uugds-plus",
-              children: <Lsi lsi={{ cs: "Vytvořit", en: "Create" }} />,
+              children: lsi.create,
               primary: true,
               onClick: handleAddItem,
             },
           ]}
         >
           <Uu5Forms.TextSelect
-            label="Participants"
+            label={lsi.participants}
             itemList={shoppingListInfo.participantNameList.map((participant) => ({ value: participant }))}
             value={shoppingListInfo.participantNameList}
             multiple={true}
@@ -176,7 +177,7 @@ const Detail = createVisualComponent({
                           onChange={(event) => handleUpdateItem(data.id, "name", event.data.value)}
                           significance="subdued"
                         />
-                        <Uu5Elements.Text>{`Created by: ${data.authorName}`}</Uu5Elements.Text>
+                        <Uu5Elements.Text>{`${lsi.createdBy}: ${data.authorName}`}</Uu5Elements.Text>
                       </Uu5Elements.Grid>
                     </Uu5Elements.ListItem>
                   </>

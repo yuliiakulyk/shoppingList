@@ -32,5 +32,30 @@
   "Menu": {
     "home": "Vítejte",
     "about": "O aplikaci"
+  },
+  "ShoppingList.Bricks.ShoppingList.ListView": {
+    "header": "Moje nákupní seznamy",
+    "create": "Vytvořit",
+    "ownedBy": "Vlastník",
+    "createFailed": "Nákupní seznam se nepodařilo vytvořit!"
+  },
+  "ShoppingList.Bricks.ShoppingList.CreateModal": {
+    "header": "Vytvořit nový nákupní seznam"
+  },
+  "ShoppingList.Bricks.ShoppingList.CreateForm": {
+    "name": "Název"
+  },
+  "ShoppingList.Bricks.ShoppingList.CreateForm": {
+    "name": "Název",
+    "submit": "Vytvořit nový nákupní seznam",
+    "cancel": "Storno"
+  },
+  "ShoppingList.Bricks.ShoppingList.Detail": {
+    "solvedOnly": "Pouze vyřešene",
+    "solved": "Vyřešene",
+    "all": "Všechny",
+    "participants": "Účastníci",
+    "create": "Vytvořit",
+    "createdBy": "Vytvořeno uživatelem"
   }
 }

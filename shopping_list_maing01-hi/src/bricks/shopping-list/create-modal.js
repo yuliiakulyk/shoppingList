@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content, PropTypes } from "uu5g05";
+import { createVisualComponent, Utils, Content, PropTypes, useLsi } from "uu5g05";
 import { Modal, Box, Line, Text, DateTime } from "uu5g05-elements";
 import Config from "./config/config.js";
 import CreateForm from "./create-form";
+import importLsi from "../../lsi/import-lsi";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -40,6 +41,7 @@ const CreateModal = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { children } = props;
+    const lsi = useLsi(importLsi, [CreateModal.uu5Tag]);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -50,7 +52,7 @@ const CreateModal = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, CreateModal);
 
     return currentNestingLevel ? (
-      <Modal header={"Create a new shopping list"} onClose={props.onClose} open>
+      <Modal header={lsi.header} onClose={props.onClose} open>
         {(modal) => (
           <CreateForm
             onSubmit={props.onFormSubmit}

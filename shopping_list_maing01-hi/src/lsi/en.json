@@ -32,5 +32,28 @@
   "Menu": {
     "home": "Welcome",
     "about": "About Application"
+  },
+  "ShoppingList.Bricks.ShoppingList.ListView": {
+    "header": "My shopping lists",
+    "create": "Create",
+    "ownedBy": "Owned by",
+    "shoppingListCreated": "Nákupní seznam '{0}' byl vytvořen.",
+    "createFailed": "Shopping list create failed!"
+  },
+  "ShoppingList.Bricks.ShoppingList.CreateModal": {
+    "header": "Create a new shopping list"
+  },
+  "ShoppingList.Bricks.ShoppingList.CreateForm": {
+    "name": "Name",
+    "submit": "Create shopping list",
+    "cancel": "Cancel"
+  },
+  "ShoppingList.Bricks.ShoppingList.Detail": {
+    "solvedOnly": "Solved only",
+    "solved": "Solved",
+    "all": "All",
+    "participants": "Participants",
+    "create": "Create",
+    "createdBy": "Created by"
   }
 }

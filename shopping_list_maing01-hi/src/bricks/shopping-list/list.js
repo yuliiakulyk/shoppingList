@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content, Lsi, useState, useSession } from "uu5g05";
+import { createVisualComponent, Utils, Content, Lsi, useState, useSession, useLsi } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import { useAlertBus } from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
@@ -9,6 +9,7 @@ import Uu5TilesElements from "uu5tilesg02-elements";
 import Config from "./config/config.js";
 import CreateModal from "./create-modal";
 import DeleteModal from "./delete-modal";
+import importLsi from "../../lsi/import-lsi";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -44,6 +45,7 @@ const ListView = createVisualComponent({
     const { listData } = props;
     let shoppingLists = listData.data;
     const { addAlert } = useAlertBus();
+    const lsi = useLsi(importLsi, [ListView.uu5Tag]);
     function showError(error, header = "") {
       addAlert({
         header,
@@ -76,13 +78,13 @@ const ListView = createVisualComponent({
       try {
         response = await listData.handlerMap.create(event.data.value);
       } catch (error) {
-        showError(error, "Shopping list create failed!");
+        showError(error, lsi.createFailed);
       }
       setCreateModalOpen({ open: false });
-      let warningCodes = Object.keys(response.uuAppErrorMap);
+      let warningCodes = Object.keys(response.uuAppErrorMap).filter(code => response.uuAppErrorMap[code].type === "warning");
       warningCodes.length === 0 &&
         addAlert({
-          message: `The shopping list ${event.data.value.name} has been created.`,
+          message: Utils.String.format(lsi.shoppingListCreated, event.data.value.name),
           priority: "success",
           durationMs: 2000,
         });
@@ -103,7 +105,7 @@ const ListView = createVisualComponent({
     return currentNestingLevel ? (
       <div {...attrs}>
         <Uu5Elements.Block
-          header="My shopping lists"
+          header={lsi.header}
           card="full"
           headerType="heading"
           level={5}
@@ -111,7 +113,7 @@ const ListView = createVisualComponent({
           actionList={[
             {
               icon: "uugds-plus",
-              children: <Lsi lsi={{ cs: "Vytvořit", en: "Create" }} />,
+              children: lsi.create,
               primary: true,
               onClick: () => handleOpenCreateModal(),
             },
@@ -137,7 +139,7 @@ const ListView = createVisualComponent({
                     >
                       <Uu5Elements.Grid flow="column" alignItems="center">
                         <Uu5Elements.Link href={"shoppingListDetail"}>{data?.name}</Uu5Elements.Link>
-                        <Uu5Elements.Text>{`Owned by: ${data?.ownerName}`}</Uu5Elements.Text>
+                        <Uu5Elements.Text>{`${lsi.ownedBy}: ${data?.ownerName}`}</Uu5Elements.Text>
                       </Uu5Elements.Grid>
                     </Uu5Elements.ListItem>
                   </>
