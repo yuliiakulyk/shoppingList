@@ -7,6 +7,7 @@ import Plus4U5App from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import ShoppingListDetail from "../routes/shopping-list-detail";
+import DarkModeToggle from "../bricks/dark-mode-toggle";
 //@@viewOff:imports
 
 //@@viewOn:constants

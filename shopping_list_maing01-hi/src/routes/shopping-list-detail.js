@@ -5,7 +5,9 @@ import Config from "./config/config.js";
 import Detail from "../bricks/shopping-list/detail.js";
 import Calls from "calls";
 import ShoppingListProvider from "../shopping-list/provider.js";
+import RouteBar from "../core/route-bar.js";
 import List from "../bricks/shopping-list/list";
+import DarkModeToggle from "../bricks/dark-mode-toggle";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -48,6 +50,7 @@ let ShoppingListDetail = createVisualComponent({
 
     return currentNestingLevel ? (
       <div {...attrs}>
+        <RouteBar />
         <ShoppingListProvider>
           {(shoppingList) => (
             <RouteController routeDataObject={shoppingList}>

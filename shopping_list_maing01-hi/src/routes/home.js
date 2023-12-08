@@ -11,6 +11,7 @@ import RouteBar from "../core/route-bar.js";
 import List from "../bricks/shopping-list/list.js";
 import importLsi from "../lsi/import-lsi.js";
 import ShoppingListListProvider from "../shopping-list/list-provider.js";
+import DarkModeToggle from "../bricks/dark-mode-toggle";
 //@@viewOff:imports
 
 //@@viewOn:constants

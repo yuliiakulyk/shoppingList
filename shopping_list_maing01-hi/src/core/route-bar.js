@@ -4,6 +4,7 @@ import Plus4U5App from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import importLsi from "../lsi/import-lsi.js";
+import DarkModeToggle from "../bricks/dark-mode-toggle";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -33,6 +34,7 @@ const RouteBar = createVisualComponent({
     const [, setRoute] = useRoute();
 
     const appActionList = [
+      { children: <DarkModeToggle /> },
       { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
       {
         children: <Lsi import={importLsi} path={["Menu", "about"]} />,
