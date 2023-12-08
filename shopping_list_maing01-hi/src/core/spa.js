@@ -59,7 +59,7 @@ const Spa = createVisualComponent({
     return (
       <Plus4U5.SpaProvider initialLanguageList={["en", "cs", "uk"]}>
         <Uu5Elements.ModalBus>
-          <Plus4U5App.Spa routeMap={ROUTE_MAP} />
+          <Plus4U5App.Spa routeMap={ROUTE_MAP} displayTop />
         </Uu5Elements.ModalBus>
       </Plus4U5.SpaProvider>
     );

@@ -98,7 +98,7 @@ const ListView = createVisualComponent({
     }
 
     function deleteShoppingList() {
-      deleteModalOpen.itemDeleteHander({ id: deleteModalOpen.shoppingListId });
+      deleteModalOpen.itemDeleteHandler({ id: deleteModalOpen.shoppingListId });
       setDeleteModalOpen({ open: false, shoppingListId: undefined });
     }
 
@@ -122,8 +122,8 @@ const ListView = createVisualComponent({
           <Uu5Tiles.ControllerProvider data={shoppingLists}>
             <Uu5TilesElements.Grid>
               {({ itemIdentifier, data, displayedData }) => {
-                data = data.data;
                 let handlerMap = data.handlerMap;
+                data = data.data;
                 return (
                   <>
                     <Uu5Elements.ListItem
@@ -150,7 +150,7 @@ const ListView = createVisualComponent({
           <Content nestingLevel={currentNestingLevel}>{children}</Content>
         </Uu5Elements.Block>
         {createModalOpen.open && <CreateModal onClose={handleCloseCreateModal} onFormSubmit={createShoppingList} />}
-        {deleteModalOpen.open && <DeleteModal onClose={handleCloseDeleteModal} onFormSubmit={deleteShoppingList} />}
+        {deleteModalOpen.open && <DeleteModal onClose={handleCloseDeleteModal} onFormSubmit={deleteShoppingList} shoppingListId={deleteModalOpen.shoppingListId}/>}
       </div>
     ) : null;
     //@@viewOff:render

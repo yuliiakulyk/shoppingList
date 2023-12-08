@@ -48,7 +48,7 @@ const DeleteModal = createVisualComponent({
       <Modal header={"Delete a shopping list"} onClose={props.onClose} open>
         {(modal) => (
           <DeleteForm
-            onSubmit={props.onFormSubmit}
+            onSubmit={() => props.onFormSubmit(props.shoppingListId)}
             onCancel={props.onClose}
             style={{ margin: "24px auto", display: "block" }}
           />

@@ -1,6 +1,7 @@
 //@@viewOn:imports
 import { createComponent, useDataList } from "uu5g05";
 import Config from "./config/config.js";
+import Context from "./context";
 import Calls from "calls";
 //@@viewOff:imports
 
@@ -45,7 +46,7 @@ const ListProvider = createComponent({
     }
 
     function handleDelete(dtoIn) {
-      console.log('itemHandlerMap.handleDelete called with ', dtoIn);
+      console.log("itemHandlerMap.handleDelete called with ", dtoIn);
       return Calls.ShoppingList.delete(dtoIn);
     }
     //@@viewOff:private
@@ -54,7 +55,11 @@ const ListProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    return typeof props.children === "function" ? props.children(shoppingListDataList) : props.children;
+    return (
+      <Context.Provider value={shoppingListDataList}>
+        {typeof props.children === "function" ? props.children(shoppingListDataList) : props.children}
+      </Context.Provider>
+    );
     //@@viewOff:render
   },
 });
