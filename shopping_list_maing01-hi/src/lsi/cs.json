@@ -57,5 +57,10 @@
     "participants": "Účastníci",
     "create": "Vytvořit",
     "createdBy": "Vytvořeno uživatelem"
+  },
+  "ShoppingList.Bricks.ShoppingList.DeleteForm": {
+    "doYouReallyWantToDelete": "Opravdu si přejete smazat nákupní seznam?",
+    "submit": "Smazat nákupní seznam",
+    "cancel": "Storno"
   }
 }

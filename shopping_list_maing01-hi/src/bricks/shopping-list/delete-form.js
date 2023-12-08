@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content } from "uu5g05";
+import { createVisualComponent, Utils, Content, useLsi } from "uu5g05";
 import Config from "./config/config.js";
 import { Form, FormText, SubmitButton, CancelButton } from "uu5g05-forms";
 import Uu5Elements from "uu5g05-elements";
+import importLsi from "../../lsi/import-lsi";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -35,6 +36,7 @@ const DeleteForm = createVisualComponent({
     //@@viewOn:private
     const { children } = props;
     const { elementProps } = Utils.VisualComponent.splitProps(props);
+    const lsi = useLsi(importLsi, [DeleteForm.uu5Tag]);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -48,10 +50,10 @@ const DeleteForm = createVisualComponent({
       <Form
         {...elementProps}
         onSubmit={props.onSubmit}>
-        <Uu5Elements.Text>Do you really want to delete the shopping list?</Uu5Elements.Text>
+        <Uu5Elements.Text>{lsi.doYouReallyWantToDelete}</Uu5Elements.Text>
         <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", paddingTop: 8 }}>
-          <CancelButton onClick={props.onCancel}>Cancel</CancelButton>
-          <SubmitButton colorScheme={"red"}>Delete</SubmitButton>
+          <CancelButton onClick={props.onCancel}>{lsi.cancel}</CancelButton>
+          <SubmitButton colorScheme={"red"}>{lsi.submit}</SubmitButton>
         </div>
       </Form>
     ) : null;

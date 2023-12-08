@@ -55,5 +55,10 @@
     "participants": "Participants",
     "create": "Create",
     "createdBy": "Created by"
+  },
+  "ShoppingList.Bricks.ShoppingList.DeleteForm": {
+    "doYouReallyWantToDelete": "Do you really want to delete the shopping list?",
+    "submit": "Delete shopping list",
+    "cancel": "Cancel"
   }
 }

@@ -45,7 +45,7 @@ const DeleteModal = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, DeleteModal);
 
     return currentNestingLevel ? (
-      <Modal header={"Delete a shopping list"} onClose={props.onClose} open>
+      <Modal onClose={props.onClose} open>
         {(modal) => (
           <DeleteForm
             onSubmit={() => props.onFormSubmit(props.shoppingListId)}

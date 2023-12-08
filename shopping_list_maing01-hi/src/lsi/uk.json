@@ -58,5 +58,10 @@
     "participants": "Учасники",
     "create": "Створити",
     "createdBy": "Автор"
+  },
+  "ShoppingList.Bricks.ShoppingList.DeleteForm": {
+    "doYouReallyWantToDelete": "Ви дійсно хочете видалити список покупок?",
+    "submit": "Видалити список покупок",
+    "cancel": "Скасувати"
   }
 }

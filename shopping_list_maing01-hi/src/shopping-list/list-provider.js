@@ -46,7 +46,6 @@ const ListProvider = createComponent({
     }
 
     function handleDelete(dtoIn) {
-      console.log("itemHandlerMap.handleDelete called with ", dtoIn);
       return Calls.ShoppingList.delete(dtoIn);
     }
     //@@viewOff:private
