@@ -11,7 +11,7 @@
       { "id": "4c1a9edb30aa48ab825d2c5dec3d1b7e3", "name": "Christmas tree", "authorName": "Yuliia Kulyk", "solved": false },
       { "id": "4c1a9edb30aa48ab825d2c5dec3d1b7e4", "name": "Christmas tree toys", "authorName": "Yuliia Kulyk", "solved": false },
       { "id": "4c1a9edb30aa48ab825d2c5dec3d1b7e5", "name": "Candles", "authorName": "Yuliia Kulyk", "solved": false },
-      { "id": "4c1a9edb30aa48ab825d2c5dec3d1b7e6", "name": "Wine", "authorName": "Yuliia Kulyk", "solved": false }
+      { "id": "4c1a9edb30aa48ab825d2c5dec3d1b7e6", "name": "Wine", "authorName": "Yuliia Kulyk", "solved": true }
     ],
     "uuAppErrorMap": {}
 }

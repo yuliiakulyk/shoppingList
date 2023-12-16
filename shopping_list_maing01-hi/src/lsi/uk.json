@@ -57,7 +57,13 @@
     "all": "Всі",
     "participants": "Учасники",
     "create": "Створити",
-    "createdBy": "Автор"
+    "createdBy": "Автор",
+    "solved": "Вирішені",
+    "notSolved": "Невирішені"
+  },
+  "ShoppingList.Routes.ShoppingListDetail": {
+    "solved": "Вирішені",
+    "notSolved": "Невирішені"
   },
   "ShoppingList.Bricks.ShoppingList.DeleteForm": {
     "doYouReallyWantToDelete": "Ви дійсно хочете видалити список покупок?",

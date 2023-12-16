@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { Utils, createVisualComponent, useSession, Lsi } from "uu5g05";
+import { Utils, createVisualComponent, useSession, Lsi, DynamicLibraryComponent } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { withRoute } from "uu_plus4u5g02-app";
@@ -9,12 +9,25 @@ import Config from "./config/config.js";
 import WelcomeRow from "../bricks/welcome-row.js";
 import RouteBar from "../core/route-bar.js";
 import List from "../bricks/shopping-list/list.js";
-import importLsi from "../lsi/import-lsi.js";
 import ShoppingListListProvider from "../shopping-list/list-provider.js";
-import DarkModeToggle from "../bricks/dark-mode-toggle";
+import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
+const colorSchema = [
+  "blue-rich",
+  "green-rich",
+  "orange-rich",
+  "cyan-rich",
+  "purple-rich",
+  "lime-rich",
+  "red-rich",
+  "brown-rich",
+  "grey-rich",
+  "amber-rich",
+  "pink-rich",
+  "yellow-rich",
+];
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -46,6 +59,26 @@ let Home = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { identity } = useSession();
+    function getStatistics(shoppingListList) {
+      let data = shoppingListList.data.map((shoppingList) => ({
+        label: shoppingList.data.name,
+        value: shoppingList.data.itemCount,
+      }));
+      return (
+        <DynamicLibraryComponent
+          uu5Tag="UU5.SimpleChart.PieChart"
+          data={data}
+          displayLabel
+          series={[
+            {
+              labelKey: "label",
+              valueKey: "value",
+              colorSchema,
+            },
+          ]}
+        />
+      );
+    }
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -70,6 +103,7 @@ let Home = createVisualComponent({
           {(shoppingListList) => (
             <RouteController routeDataObject={shoppingListList}>
               <List listData={shoppingListList} />
+              {shoppingListList.state === "ready" && getStatistics(shoppingListList)}
             </RouteController>
           )}
         </ShoppingListListProvider>

@@ -58,6 +58,10 @@
     "create": "Vytvořit",
     "createdBy": "Vytvořeno uživatelem"
   },
+  "ShoppingList.Routes.ShoppingListDetail": {
+    "solved": "Vyřešene",
+    "notSolved": "Nevyřešene"
+  },
   "ShoppingList.Bricks.ShoppingList.DeleteForm": {
     "doYouReallyWantToDelete": "Opravdu si přejete smazat nákupní seznam?",
     "submit": "Smazat nákupní seznam",

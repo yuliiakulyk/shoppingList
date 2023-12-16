@@ -56,6 +56,10 @@
     "create": "Create",
     "createdBy": "Created by"
   },
+  "ShoppingList.Routes.ShoppingListDetail": {
+    "solved": "Solved",
+    "notSolved": "Not solved"
+  },
   "ShoppingList.Bricks.ShoppingList.DeleteForm": {
     "doYouReallyWantToDelete": "Do you really want to delete the shopping list?",
     "submit": "Delete shopping list",

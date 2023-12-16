@@ -17,7 +17,7 @@
         "Ivo Milota",
         "Zdenek Koubek"
       ],
-      "items": []
+      "itemCount": 10
     },
     {
       "id": "4c1a9edb30aa48ab825d2c5dec3d1b72",
@@ -36,7 +36,7 @@
         "Ivo Milota",
         "Zdenek Koubek"
       ],
-      "items": []
+      "itemCount": 40
     },
     {
       "id": "4c1a9edb30aa48ab825d2c5dec3d1b73",
@@ -55,7 +55,7 @@
         "Ivo Milota",
         "Zdenek Koubek"
       ],
-      "items": []
+      "itemCount": 20
     },
     {
       "id": "4c1a9edb30aa48ab825d2c5dec3d1b74",
@@ -74,7 +74,7 @@
         "Ivo Milota",
         "Zdenek Koubek"
       ],
-      "items": []
+      "itemCount": 14
     }
   ],
   "uuAppErrorMap": {}
